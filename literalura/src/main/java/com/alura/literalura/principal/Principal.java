@@ -154,7 +154,12 @@ public class Principal {
         List<Autor> autoresVivos = autores.stream()
                 .filter(autor -> {
                     try {
-                        int nacimiento = Integer.parseInt(autor.getFechaDeNacimiento().trim());
+                        String nacimientoStr = autor.getFechaDeNacimiento(); //Si la fecha de nacimiento esta vacia (no existe)
+                        if (nacimientoStr == null || nacimientoStr.trim().isEmpty())
+                            {
+                                return false;
+                            }
+                        int nacimiento = Integer.parseInt(nacimientoStr.trim());
                         String muerteStr = autor.getFechaDeMuerte();
                         int muerte = (muerteStr == null || muerteStr.trim().isEmpty())
                                 ? Integer.MAX_VALUE
@@ -239,6 +244,7 @@ public class Principal {
 
 
 }
+
 
 
 
